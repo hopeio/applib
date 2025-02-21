@@ -1,2 +1,2 @@
-# appext
+# applib
 flutter
