@@ -1,7 +1,6 @@
-import 'package:app/global/state.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 typedef Callback = void Function();
@@ -26,16 +25,16 @@ void dialog(String message, Callback success, Callback cancel) {
   ));
 }
 
-void toast(String message) {
+void toast(String message,{Color color = Colors.blueAccent}) {
   Widget toast = Center(child:ConstrainedBox(
     constraints: BoxConstraints(maxHeight: 60, maxWidth: 300),
     child: Container(padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
       decoration: BoxDecoration(
-        color: globalState.isDarkMode.value?Colors.black:Colors.blueAccent,
+        color: color,
         borderRadius: BorderRadius.circular(25.0),
         //color: Colors.greenAccent,
       ),child:Text(message,textAlign: TextAlign.center,softWrap: true,
-            style: TextStyle(color:globalState.isDarkMode.value?Colors.white:Colors.black)
+            style: TextStyle(color:color)
         )),
   ));
   Get.showOverlay(
