@@ -15,7 +15,7 @@ class Subject<T> {
   }
 
   void notifyAllObservers(){
-    observers.forEach((observer) { observer.update(options); });
+    for (var observer in observers) { observer.update(options); }
   }
 }
 

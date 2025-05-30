@@ -1,8 +1,5 @@
-
-import 'applib_platform_interface.dart';
-
-class Applib {
-  Future<String?> getPlatformVersion() {
-    return ApplibPlatform.instance.getPlatformVersion();
-  }
+/// A Calculator.
+class Calculator {
+  /// Returns [value] plus 1.
+  int addOne(int value) => value + 1;
 }
