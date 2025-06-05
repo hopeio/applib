@@ -1,12 +1,29 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class SimpleRoute extends PageRoute {
+class SimpleRoute<T> extends PageRoute<T> with MaterialRouteTransitionMixin<T> {
+  /// Construct a MaterialPageRoute whose contents are defined by [builder].
   SimpleRoute({
-    super.settings,
     required this.builder,
-  });
+    super.settings,
+    super.requestFocus,
+    this.maintainState = true,
+    super.fullscreenDialog,
+    super.allowSnapshotting = true,
+    super.barrierDismissible = false,
+    super.traversalEdgeBehavior,
+    super.directionalTraversalEdgeBehavior,
+  }) ;
 
+  @override
+  Widget buildContent(BuildContext context) => builder(context);
+
+  @override
+  final bool maintainState;
+
+  @override
+  String get debugLabel => '${super.debugLabel}(${settings.name})';
 
   final WidgetBuilder builder;
 
@@ -15,35 +32,6 @@ class SimpleRoute extends PageRoute {
 
   @override
   bool get opaque => false;
-
-  @override
-  bool get maintainState => true;
-
-  @override
-  Duration get transitionDuration => Duration(milliseconds: 0);
-
-  @override
-  Widget buildPage(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      ) {
-    return builder(context);
-  }
-
-  /// 页面切换动画
-  @override
-  Widget buildTransitions(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      Widget child,
-      ) {
-    return FadeTransition(
-      opacity: animation,
-      child: child,
-    );
-  }
 
   @override
   Color? get barrierColor => null;
